@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DriveLux Motors - explore our featured cars and book a test drive.">
+  <title>DriveLux Motors | Car Showroom</title>
+  <style>
+    :root { --dark:#101820; --gold:#f5b942; --light:#f4f6f8; --muted:#687582; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:Arial,Helvetica,sans-serif; color:var(--dark); background:#fff; line-height:1.6; }
+    a { color:inherit; text-decoration:none; }
+    .topbar { background:#0b1117; color:#dce3e9; padding:8px 7%; font-size:13px; display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap; }
+    header { position:sticky; top:0; z-index:10; background:#fff; box-shadow:0 2px 14px #00000012; padding:15px 7%; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .logo { font-size:23px; font-weight:900; letter-spacing:.5px; }
+    .logo span { color:#d99516; }
+    nav { display:flex; gap:25px; align-items:center; }
+    nav a { font-weight:700; font-size:14px; }
+    nav a:hover { color:#c8860b; }
+    .btn { display:inline-block; border:0; border-radius:6px; background:var(--gold); color:#151515; padding:12px 19px; font-weight:800; cursor:pointer; transition:.2s; }
+    .btn:hover { background:#e5a72e; transform:translateY(-1px); }
+    .hero { min-height:520px; padding:80px 7%; display:flex; align-items:center; color:white; background:linear-gradient(90deg,#101820 5%,#101820d9 48%,#10182030),url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=85') center/cover; }
+    .hero-content { max-width:590px; }
+    .eyebrow { color:var(--gold); text-transform:uppercase; font-weight:800; letter-spacing:2px; font-size:13px; }
+    h1 { font-size:clamp(38px,6vw,65px); line-height:1.08; margin:14px 0 18px; }
+    .hero p { color:#e0e5e9; max-width:480px; margin-bottom:27px; }
+    section { padding:70px 7%; }
+    .section-head { text-align:center; margin-bottom:35px; }
+    .section-head h2 { font-size:34px; margin-bottom:7px; }
+    .section-head p { color:var(--muted); }
+    .filters { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+    .filter { border:1px solid #d6dce1; background:white; padding:9px 17px; border-radius:30px; cursor:pointer; font-weight:700; }
+    .filter.active,.filter:hover { background:var(--dark); color:white; border-color:var(--dark); }
+    .cars { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+    .car-card { border:1px solid #e5e9ed; border-radius:12px; overflow:hidden; background:white; box-shadow:0 8px 25px #14202b0b; transition:.2s; }
+    .car-card:hover { transform:translateY(-5px); box-shadow:0 12px 28px #14202b18; }
+    .car-card img { width:100%; height:205px; object-fit:cover; display:block; background:#e9edf0; }
+    .car-info { padding:19px; }
+    .car-info h3 { font-size:20px; }
+    .meta { color:var(--muted); font-size:13px; margin:5px 0 12px; }
+    .price-row { display:flex; justify-content:space-between; align-items:center; gap:10px; border-top:1px solid #edf0f2; padding-top:14px; margin-top:12px; }
+    .price { font-size:19px; font-weight:900; }
+    .small-btn { padding:9px 13px; font-size:13px; }
+    .why { background:var(--light); }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .feature { background:white; border-radius:10px; padding:25px; text-align:center; }
+    .feature .symbol { font-size:30px; margin-bottom:8px; }
+    .feature h3 { margin-bottom:6px; }
+    .feature p { color:var(--muted); font-size:14px; }
+    .booking { background:var(--dark); color:white; }
+    .booking-wrap { max-width:760px; margin:auto; }
+    .booking .section-head p { color:#c3cbd2; }
+    form { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+    input,select,textarea { width:100%; padding:13px; border:1px solid #d6dce1; border-radius:6px; font:inherit; background:white; color:#17212a; }
+    textarea { grid-column:1/-1; min-height:90px; resize:vertical; }
+    form button { grid-column:1/-1; }
+    #formMessage { margin-top:14px; color:#ffe0a0; text-align:center; }
+    footer { background:#080e13; color:#c6cdd3; padding:30px 7%; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; font-size:14px; }
+    footer strong { color:white; }
+    @media(max-width:850px) { .cars { grid-template-columns:repeat(2,1fr); } .features { grid-template-columns:1fr 1fr; } }
+    @media(max-width:600px) {
+      header { align-items:flex-start; flex-direction:column; }
+      nav { width:100%; gap:15px; flex-wrap:wrap; }
+      .hero { min-height:470px; padding-top:65px; }
+      .cars,.features,form { grid-template-columns:1fr; }
+      textarea,form button { grid-column:auto; }
+      section { padding:55px 6%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar"><span>📍 Main Market, Ludhiana, Punjab</span><span>☎ +91 98765 43210 &nbsp; | &nbsp; Open: Mon–Sat, 9 AM–7 PM</span></div>
+  <header>
+    <a class="logo" href="#home">DRIVE<span>LUX</span> MOTORS</a>
+    <nav>
+      <a href="#home">Home</a><a href="#cars">Our Cars</a><a href="#about">Why Us</a><a href="#contact">Contact</a>
+      <a class="btn" href="#contact">Book a Visit</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow">Find your perfect drive</div>
+        <h1>Every journey deserves a great car.</h1>
+        <p>Explore our hand-picked collection of stylish, comfortable and reliable cars. Your next adventure starts here.</p>
+        <a class="btn" href="#cars">Explore Our Cars</a>
+      </div>
+    </section>
+
+    <section id="cars">
+      <div class="section-head">
+        <div class="eyebrow">Our collection</div>
+        <h2>Featured Cars</h2>
+        <p>Choose a car that fits your style and your journey.</p>
+      </div>
+      <div class="filters">
+        <button class="filter active" data-filter="all">All Cars</button>
+        <button class="filter" data-filter="suv">SUV</button>
+        <button class="filter" data-filter="sedan">Sedan</button>
+        <button class="filter" data-filter="hatchback">Hatchback</button>
+      </div>
+      <div class="cars">
+        <article class="car-card" data-type="suv">
+          <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=80" alt="Modern SUV">
+          <div class="car-info"><h3>Urban Explorer SUV</h3><div class="meta">SUV · Automatic · 5 Seats</div><p>Spacious comfort for family trips and everyday travel.</p><div class="price-row"><span class="price">₹12.5 Lakh*</span><button class="btn small-btn" onclick="chooseCar('Urban Explorer SUV')">Enquire</button></div></div>
+        </article>
+        <article class="car-card" data-type="sedan">
+          <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80" alt="Red sports sedan">
+          <div class="car-info"><h3>Velocity Sedan</h3><div class="meta">Sedan · Automatic · 5 Seats</div><p>A refined design with a smooth and comfortable drive.</p><div class="price-row"><span class="price">₹10.8 Lakh*</span><button class="btn small-btn" onclick="chooseCar('Velocity Sedan')">Enquire</button></div></div>
+        </article>
+        <article class="car-card" data-type="hatchback">
+          <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=900&q=80" alt="Compact hatchback car">
+          <div class="car-info"><h3>City Smart Hatch</h3><div class="meta">Hatchback · Manual · 5 Seats</div><p>Compact, practical and easy to drive around the city.</p><div class="price-row"><span class="price">₹6.2 Lakh*</span><button class="btn small-btn" onclick="chooseCar('City Smart Hatch')">Enquire</button></div></div>
+        </article>
+      </div>
+      <p style="text-align:center;color:#687582;font-size:12px;margin-top:18px;">*Sample prices for demonstration only. Replace with actual showroom prices and vehicle details.</p>
+    </section>
+
+    <section class="why" id="about">
+      <div class="section-head"><div class="eyebrow">The DriveLux difference</div><h2>Why Choose Us?</h2><p>A simple, transparent and comfortable car-buying experience.</p></div>
+      <div class="features">
+        <div class="feature"><div class="symbol">🚘</div><h3>Quality Collection</h3><p>Explore carefully selected vehicles for different needs and budgets.</p></div>
+        <div class="feature"><div class="symbol">🤝</div><h3>Friendly Guidance</h3><p>Our team can help you compare options and understand features.</p></div>
+        <div class="feature"><div class="symbol">🔑</div><h3>Test Drives</h3><p>Arrange a visit and experience your preferred car before deciding.</p></div>
+      </div>
+    </section>
+
+    <section class="booking" id="contact">
+      <div class="booking-wrap">
+        <div class="section-head"><div class="eyebrow">Let's get you moving</div><h2>Book a Test Drive</h2><p>Fill in the sample form and our showroom team will get in touch.</p></div>
+        <form id="bookingForm">
+          <input id="customerName" type="text" placeholder="Your full name" required>
+          <input id="phone" type="tel" placeholder="Phone number" required>
+          <select id="carChoice" required><option value="">Select a car</option><option>Urban Explorer SUV</option><option>Velocity Sedan</option><option>City Smart Hatch</option></select>
+          <input id="visitDate" type="date" required>
+          <textarea id="message" placeholder="Any questions or preferred time? (optional)"></textarea>
+          <button class="btn" type="submit">Submit Test Drive Request</button>
+        </form>
+        <p id="formMessage" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>DRIVELUX MOTORS</strong><br>Sample car showroom website project.</div>
+    <div>📍 Ludhiana, Punjab &nbsp; | &nbsp; ☎ +91 98765 43210<br>© 2026 DriveLux Motors. Demo website.</div>
+  </footer>
+
+  <script>
+    // Filter the displayed cars by category.
+    document.querySelectorAll('.filter').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.filter').forEach(item => item.classList.remove('active'));
+        button.classList.add('active');
+        const category = button.dataset.filter;
+        document.querySelectorAll('.car-card').forEach(card => {
+          card.style.display = category === 'all' || card.dataset.type === category ? '' : 'none';
+        });
+      });
+    });
+
+    // Fill the selected car into the enquiry form.
+    function chooseCar(carName) {
+      document.getElementById('carChoice').value = carName;
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Demo-only form: it displays a message and does not send/store the data.
+    document.getElementById('bookingForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('customerName').value.trim();
+      const car = document.getElementById('carChoice').value;
+      document.getElementById('formMessage').textContent =
+        `Thank you, ${name}! Your demo test-drive request for the ${car} has been recorded on this page. No information was sent to a server.`;
+      event.target.reset();
+    });
+  </script>
+</body>
+</html>
